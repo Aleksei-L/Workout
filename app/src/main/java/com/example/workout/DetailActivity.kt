@@ -9,7 +9,7 @@ class DetailActivity : AppCompatActivity() {
 		setContentView(R.layout.activity_detail)
 
 		val frag = supportFragmentManager.findFragmentById(R.id.detail_frag) as WorkoutDetailFragment
-		val workoutId = intent.extras!!.get(EXTRA_WORKOUT_ID) as Int
+		val workoutId = intent.getIntExtra(EXTRA_WORKOUT_ID, -1)
 		frag.setWorkout(workoutId)
 	}
 
