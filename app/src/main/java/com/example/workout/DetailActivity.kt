@@ -8,7 +8,12 @@ class DetailActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_detail)
 
-		val frag: WorkoutDetailFragment = supportFragmentManager.findFragmentById(R.id.detail_frag) as WorkoutDetailFragment
-		frag.setWorkout(1)
+		val frag = supportFragmentManager.findFragmentById(R.id.detail_frag) as WorkoutDetailFragment
+		val workoutId = intent.extras!!.get(EXTRA_WORKOUT_ID) as Int
+		frag.setWorkout(workoutId)
+	}
+
+	companion object {
+		const val EXTRA_WORKOUT_ID = "id"
 	}
 }
