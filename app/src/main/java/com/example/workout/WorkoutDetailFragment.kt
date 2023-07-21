@@ -1,11 +1,12 @@
 package com.example.workout
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 
 class WorkoutDetailFragment : Fragment() {
 	override fun onCreateView(
@@ -31,6 +32,14 @@ class WorkoutDetailFragment : Fragment() {
 		super.onCreate(savedInstanceState)
 		if (savedInstanceState != null)
 			workoutId = savedInstanceState.getInt("workoutId")
+		if (savedInstanceState == null) {
+			val stopwatch = StopwatchFragment()
+			val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+			ft.add(R.id.stopwatch_container, stopwatch)
+			ft.addToBackStack(null)
+			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+			ft.commit()
+		}
 	}
 
 	override fun onSaveInstanceState(outState: Bundle) {
@@ -40,7 +49,7 @@ class WorkoutDetailFragment : Fragment() {
 
 	private var workoutId = 0
 
-	public fun setWorkout(id: Int) {
+	fun setWorkout(id: Int) {
 		workoutId = id
 	}
 }
